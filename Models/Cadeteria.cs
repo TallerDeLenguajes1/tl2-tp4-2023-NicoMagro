@@ -1,0 +1,132 @@
+namespace WebApi
+{
+    public class Cadeteria
+    {
+        private string nombre;
+        private string telefono;
+        private List<Cadete> listaCadetes = new List<Cadete>();
+        private int nroPedidosCreados;
+        private List<Pedidos> listaPedidos = new List<Pedidos>();
+
+        private Informe cadInforme = new Informe();
+
+        public List<Cadete> ListaCadetes { get => listaCadetes; set => listaCadetes = value; }
+        public int NroPedidosCreados { get => nroPedidosCreados; set => nroPedidosCreados = value; }
+        public string Nombre { get => nombre; set => nombre = value; }
+        public string Telefono { get => telefono; set => telefono = value; }
+        public List<Pedidos> ListaPedidos { get => listaPedidos; set => listaPedidos = value; }
+        public Informe CadInforme { get => cadInforme; set => cadInforme = value; }
+        private static Cadeteria instance;
+
+        public static Cadeteria Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    AccesoADatos cargar = new AccesoJson();
+                    instance = cargar.CargarInfoCadeteria();
+                }
+                return instance;
+            }
+        }
+
+        public Cadeteria(string nombre, string telefono, int nroPedidosCreados)
+        {
+            this.nombre = nombre;
+            this.telefono = telefono;
+            this.nroPedidosCreados = nroPedidosCreados;
+            this.listaCadetes = new List<Cadete>();
+        }
+
+
+        public void AgregarPedido()
+        {
+            Pedidos nuevoPedido = new Pedidos(nroPedidosCreados + 1);
+            NroPedidosCreados += 1;
+            listaPedidos.Add(nuevoPedido);
+        }
+
+        public void AsignarPedido(int idPedido, int idCadete)
+        {
+            Cadete cadeteBuscado = listaCadetes.FirstOrDefault(cadete => cadete.Id == idCadete);
+            if (cadeteBuscado != null)
+            {
+                Pedidos pedidoBuscado = ListaPedidos.FirstOrDefault(pedido => pedido.Nro == idPedido);
+                if (pedidoBuscado != null)
+                {
+                    //Si el pedido no tiene cadete asignado lo agrega
+                    if (pedidoBuscado.IdCadeteEncargado == null)
+                    {
+                        pedidoBuscado.IdCadeteEncargado = idCadete;
+                    }
+                }
+
+            }
+        }
+        public void CambiarCadetePedido(int idPedido, int idCadete)
+        {
+            Cadete cadeteBuscado = listaCadetes.FirstOrDefault(cadete => cadete.Id == idCadete);
+            if (cadeteBuscado != null)
+            {
+                Pedidos pedidoBuscado = ListaPedidos.FirstOrDefault(pedido => pedido.Nro == idPedido);
+                if (pedidoBuscado != null)
+                {
+                    pedidoBuscado.IdCadeteEncargado = idCadete;
+                }
+            }
+        }
+
+        public void CambiarEstadoPedido(int idPedido, int estado)
+        {
+            Pedidos pedidoEncontrado = listaPedidos.FirstOrDefault(pedido => pedido.Nro == idPedido);
+
+            if (pedidoEncontrado != null)
+            {
+                string nuevoEstado = "";
+
+                switch (estado)
+                {
+                    case 1:
+                        nuevoEstado = "Pendiente";
+                        break;
+                    case 2:
+                        nuevoEstado = "EnCamino";
+                        break;
+                    case 3:
+                        nuevoEstado = "Entregado";
+                        break;
+                    default:
+                        return;
+                }
+                pedidoEncontrado.Estado = nuevoEstado;
+
+            }
+        }
+        public void EliminarPedido(int idPedido)
+        {
+            Pedidos pedidoEncontrado = ListaPedidos.FirstOrDefault(pedido => pedido.Nro == idPedido);
+            if (pedidoEncontrado != null)
+            {
+                ListaPedidos.Remove(pedidoEncontrado);
+            }
+        }
+        public double JornalACobrar(int idCadete)
+        {
+            double cantPedidosEntregados = 0;
+            foreach (Pedidos pedido in ListaPedidos)
+            {
+                if (pedido.IdCadeteEncargado == idCadete && pedido.Estado == "Entregado")
+                {
+                    cantPedidosEntregados++;
+                }
+            }
+            return 500 * cantPedidosEntregados;
+        }
+        public void CrearInforme()
+        {
+            var nuevoInforme = new Informe(this.listaPedidos, this.ListaCadetes);
+            CadInforme = nuevoInforme;
+        }
+    }
+}

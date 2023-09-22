@@ -1,0 +1,45 @@
+{
+    "Nombre": "Cadeteria Ejemplo",
+    "Telefono": "123456789",
+    "NroPedidosCreados": 2,
+    "ListaCadetes": [
+        {
+            "Id": 1,
+            "Nombre": "Juan Pérez",
+            "Direccion": "Calle Principal 123",
+            "Telefono": "5555555"
+        },
+        {
+            "Id": 2,
+            "Nombre": "María González",
+            "Direccion": "Avenida Central 456",
+            "Telefono": "8888888"
+        }
+    ],
+    "ListaPedidos": [
+        {
+            "Nro": 1,
+            "Obs": "Sin observaciones",
+            "InfoCliente": {
+                "Nombre": "Cliente1",
+                "Direccion": "Dirección1",
+                "Telefono": "555555555",
+                "DatosReferenciaDireccion": "Referencia1"
+            },
+            "Estado": "EnPreparacion",
+            "IdCadeteEncargado": 2
+        },
+        {
+            "Nro": 2,
+            "Obs": "Pedido urgente",
+            "InfoCliente": {
+                "Nombre": "Cliente2",
+                "Direccion": "Dirección2",
+                "Telefono": "666666666",
+                "DatosReferenciaDireccion": "Referencia2"
+            },
+            "Estado": "EnCamino",
+            "IdCadeteEncargado": 1
+        }
+    ]
+}
