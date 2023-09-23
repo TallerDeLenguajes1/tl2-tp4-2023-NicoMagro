@@ -12,10 +12,10 @@ namespace WebApi
         public Informe()
         {
         }
-        public Informe(List<Pedidos> ListaPedidos, List<Cadete> ListaCadetes)
+        public Informe(List<Pedido> ListaPedidos, List<Cadete> ListaCadetes)
         {
 
-            foreach (Pedidos pedido in ListaPedidos)
+            foreach (Pedido pedido in ListaPedidos)
             {
                 if (pedido.Estado == "Entregado")
                 {

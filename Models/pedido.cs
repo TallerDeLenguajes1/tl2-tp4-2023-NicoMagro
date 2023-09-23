@@ -1,6 +1,6 @@
 namespace WebApi
 {
-    public class Pedidos
+    public class Pedido
     {
         private int nro;
         private string obs;
@@ -16,7 +16,7 @@ namespace WebApi
         public int? IdCadeteEncargado { get => idCadeteEncargado; set => idCadeteEncargado = value; }
         public Cliente InfoCliente { get => infoCliente; set => infoCliente = value; }
 
-        public Pedidos(int nro)
+        public Pedido(int nro)
         {
             this.nro = nro;
             this.InfoCliente = CrearClienteAleatorio(); // Crear cliente aleatorio

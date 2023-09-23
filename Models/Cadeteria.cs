@@ -6,7 +6,7 @@ namespace WebApi
         private string telefono;
         private List<Cadete> listaCadetes = new List<Cadete>();
         private int nroPedidosCreados;
-        private List<Pedidos> listaPedidos = new List<Pedidos>();
+        private List<Pedido> listaPedidos = new List<Pedido>();
 
         private Informe cadInforme = new Informe();
 
@@ -14,7 +14,7 @@ namespace WebApi
         public int NroPedidosCreados { get => nroPedidosCreados; set => nroPedidosCreados = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public string Telefono { get => telefono; set => telefono = value; }
-        public List<Pedidos> ListaPedidos { get => listaPedidos; set => listaPedidos = value; }
+        public List<Pedido> ListaPedidos { get => listaPedidos; set => listaPedidos = value; }
         public Informe CadInforme { get => cadInforme; set => cadInforme = value; }
         private static Cadeteria instance;
 
@@ -42,7 +42,7 @@ namespace WebApi
 
         public void AgregarPedido()
         {
-            Pedidos nuevoPedido = new Pedidos(nroPedidosCreados + 1);
+            Pedido nuevoPedido = new Pedido(nroPedidosCreados + 1);
             NroPedidosCreados += 1;
             listaPedidos.Add(nuevoPedido);
         }
@@ -52,7 +52,7 @@ namespace WebApi
             Cadete cadeteBuscado = listaCadetes.FirstOrDefault(cadete => cadete.Id == idCadete);
             if (cadeteBuscado != null)
             {
-                Pedidos pedidoBuscado = ListaPedidos.FirstOrDefault(pedido => pedido.Nro == idPedido);
+                Pedido pedidoBuscado = ListaPedidos.FirstOrDefault(pedido => pedido.Nro == idPedido);
                 if (pedidoBuscado != null)
                 {
                     //Si el pedido no tiene cadete asignado lo agrega
@@ -69,7 +69,7 @@ namespace WebApi
             Cadete cadeteBuscado = listaCadetes.FirstOrDefault(cadete => cadete.Id == idCadete);
             if (cadeteBuscado != null)
             {
-                Pedidos pedidoBuscado = ListaPedidos.FirstOrDefault(pedido => pedido.Nro == idPedido);
+                Pedido pedidoBuscado = ListaPedidos.FirstOrDefault(pedido => pedido.Nro == idPedido);
                 if (pedidoBuscado != null)
                 {
                     pedidoBuscado.IdCadeteEncargado = idCadete;
@@ -79,7 +79,7 @@ namespace WebApi
 
         public void CambiarEstadoPedido(int idPedido, int estado)
         {
-            Pedidos pedidoEncontrado = listaPedidos.FirstOrDefault(pedido => pedido.Nro == idPedido);
+            Pedido pedidoEncontrado = listaPedidos.FirstOrDefault(pedido => pedido.Nro == idPedido);
 
             if (pedidoEncontrado != null)
             {
@@ -105,7 +105,7 @@ namespace WebApi
         }
         public void EliminarPedido(int idPedido)
         {
-            Pedidos pedidoEncontrado = ListaPedidos.FirstOrDefault(pedido => pedido.Nro == idPedido);
+            Pedido pedidoEncontrado = ListaPedidos.FirstOrDefault(pedido => pedido.Nro == idPedido);
             if (pedidoEncontrado != null)
             {
                 ListaPedidos.Remove(pedidoEncontrado);
@@ -114,7 +114,7 @@ namespace WebApi
         public double JornalACobrar(int idCadete)
         {
             double cantPedidosEntregados = 0;
-            foreach (Pedidos pedido in ListaPedidos)
+            foreach (Pedido pedido in ListaPedidos)
             {
                 if (pedido.IdCadeteEncargado == idCadete && pedido.Estado == "Entregado")
                 {
