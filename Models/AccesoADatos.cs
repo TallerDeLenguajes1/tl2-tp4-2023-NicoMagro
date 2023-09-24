@@ -21,7 +21,6 @@ namespace WebApi
                     string Telefono = datos[1];
                     int NroPedidosCreados = int.Parse(datos[2]);
                     cadeteria = new Cadeteria(Nombre, Telefono, NroPedidosCreados);
-                    cadeteria.ListaCadetes = CargarCadetes();
                 }
             }
             catch (IOException ex)
