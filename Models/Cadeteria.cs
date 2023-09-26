@@ -24,8 +24,16 @@ namespace WebApi
             {
                 if (instance == null)
                 {
-                    AccesoADatos cargar = new AccesoJson();
-                    instance = cargar.CargarInfoCadeteria();
+                    AccesoADatosCadeteria cargarCadeteria = new AccesoCadeteriaJSON();
+                    instance = cargarCadeteria.Obtener();
+
+                    AccesoADatosCadetes cargarCadetes = new AccesoADatosCadetesJSON();
+                    cargarCadetes.Obtener();
+                    cargarCadetes.Guardar(instance);
+
+                    AccesoADatosPedido cargarPedidos = new AccesoADatosPedidoJSON();
+                    cargarPedidos.Obtener();
+                    cargarPedidos.Guardar(instance);
                 }
                 return instance;
             }

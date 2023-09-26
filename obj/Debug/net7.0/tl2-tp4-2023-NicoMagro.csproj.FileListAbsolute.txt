@@ -32,3 +32,5 @@
 /Users/angelnicolasmagro/Documents/Facultad/TallerII/Practica/TP4/tl2-tp4-2023-NicoMagro/obj/Debug/net7.0/tl2-tp4-2023-NicoMagro.pdb
 /Users/angelnicolasmagro/Documents/Facultad/TallerII/Practica/TP4/tl2-tp4-2023-NicoMagro/obj/Debug/net7.0/tl2-tp4-2023-NicoMagro.genruntimeconfig.cache
 /Users/angelnicolasmagro/Documents/Facultad/TallerII/Practica/TP4/tl2-tp4-2023-NicoMagro/obj/Debug/net7.0/ref/tl2-tp4-2023-NicoMagro.dll
+/Users/angelnicolasmagro/Documents/Facultad/TallerII/Practica/TP4/tl2-tp4-2023-NicoMagro/bin/Debug/net7.0/Models/cadetes.json
+/Users/angelnicolasmagro/Documents/Facultad/TallerII/Practica/TP4/tl2-tp4-2023-NicoMagro/bin/Debug/net7.0/Models/pedidos.json

@@ -1,0 +1,26 @@
+[
+    {
+        "Nro": 1,
+        "Obs": "Sin observaciones",
+        "InfoCliente": {
+            "Nombre": "Cliente1",
+            "Direccion": "Dirección1",
+            "Telefono": "555555555",
+            "DatosReferenciaDireccion": "Referencia1"
+        },
+        "Estado": "EnPreparacion",
+        "IdCadeteEncargado": 2
+    },
+    {
+        "Nro": 2,
+        "Obs": "Pedido urgente",
+        "InfoCliente": {
+            "Nombre": "Cliente2",
+            "Direccion": "Dirección2",
+            "Telefono": "666666666",
+            "DatosReferenciaDireccion": "Referencia2"
+        },
+        "Estado": "EnCamino",
+        "IdCadeteEncargado": 1
+    }
+]

@@ -6,6 +6,11 @@ namespace WebApi
     {
         public List<Pedido> ListaPedidos = new List<Pedido>();
         public abstract List<Pedido> Obtener();
+
+        public void Guardar(Cadeteria _cadeteria)
+        {
+            _cadeteria.ListaPedidos = ListaPedidos;
+        }
     }
 
     public class AccesoADatosPedidoCSV : AccesoADatosPedido
@@ -38,7 +43,7 @@ namespace WebApi
     {
         public override List<Pedido> Obtener()
         {
-            string contenido = File.ReadAllText("pedidos.json");
+            string contenido = File.ReadAllText("Models/pedidos.json");
             ListaPedidos = JsonSerializer.Deserialize<List<Pedido>>(contenido);
 
             return ListaPedidos;
