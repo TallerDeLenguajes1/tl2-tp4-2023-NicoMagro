@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace WebApi
 {
     public class Cadeteria
@@ -139,6 +141,11 @@ namespace WebApi
         {
             var nuevoInforme = new Informe(this.listaPedidos, this.ListaCadetes);
             CadInforme = nuevoInforme;
+        }
+        public void AgregarCadete(int id, string nombre, string direccion, string telefono)
+        {
+            Cadete cad = new Cadete(id, nombre, direccion, telefono);
+            this.ListaCadetes.Add(cad);
         }
     }
 }

@@ -10,6 +10,8 @@ namespace WebApi
         public void Guardar(List<Cadete> lista)
         {
             ListaCadetes = lista;
+            string contenido = JsonSerializer.Serialize(ListaCadetes);
+            File.WriteAllText("Models/cadetes.json", contenido);
         }
     }
 
