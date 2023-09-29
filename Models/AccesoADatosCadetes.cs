@@ -7,9 +7,9 @@ namespace WebApi
 
         public abstract List<Cadete> Obtener();
 
-        public void Guardar(Cadeteria _cadeteria)
+        public void Guardar(List<Cadete> lista)
         {
-            _cadeteria.ListaCadetes = ListaCadetes;
+            ListaCadetes = lista;
         }
     }
 

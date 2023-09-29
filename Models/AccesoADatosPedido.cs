@@ -7,9 +7,11 @@ namespace WebApi
         public List<Pedido> ListaPedidos = new List<Pedido>();
         public abstract List<Pedido> Obtener();
 
-        public void Guardar(Cadeteria _cadeteria)
+        public void Guardar(List<Pedido> lista)
         {
-            _cadeteria.ListaPedidos = ListaPedidos;
+            ListaPedidos = lista;
+            string contenido = JsonSerializer.Serialize(ListaPedidos);
+            File.WriteAllText("Models/pedidos.json", contenido);
         }
     }
 

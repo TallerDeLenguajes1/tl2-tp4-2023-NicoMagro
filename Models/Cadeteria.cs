@@ -7,6 +7,9 @@ namespace WebApi
         private List<Cadete> listaCadetes = new List<Cadete>();
         private int nroPedidosCreados;
         private List<Pedido> listaPedidos = new List<Pedido>();
+        //private AccesoADatosCadeteria cargarCadeteria;
+        private AccesoADatosPedido cargarPedidos;
+        private AccesoADatosCadetes cargarCadetes;
 
         private Informe cadInforme = new Informe();
 
@@ -16,7 +19,10 @@ namespace WebApi
         public string Telefono { get => telefono; set => telefono = value; }
         public List<Pedido> ListaPedidos { get => listaPedidos; set => listaPedidos = value; }
         public Informe CadInforme { get => cadInforme; set => cadInforme = value; }
-        private static Cadeteria instance;
+        //public AccesoADatosCadeteria CargarCadeteria { get => cargarCadeteria; set => cargarCadeteria = value; }
+        public AccesoADatosPedido CargarPedidos { get => cargarPedidos; set => cargarPedidos = value; }
+        public AccesoADatosCadetes CargarCadetes { get => cargarCadetes; set => cargarCadetes = value; }
+        private static Cadeteria instance;  //Campo privado llamado instancia del tipo cadeteria
 
         public static Cadeteria Instance
         {
@@ -24,16 +30,14 @@ namespace WebApi
             {
                 if (instance == null)
                 {
-                    AccesoADatosCadeteria cargarCadeteria = new AccesoCadeteriaJSON();
-                    instance = cargarCadeteria.Obtener();
+                    AccesoADatosCadeteria CargarCadeteria = new AccesoCadeteriaJSON();
+                    instance = CargarCadeteria.Obtener();
 
-                    AccesoADatosCadetes cargarCadetes = new AccesoADatosCadetesJSON();
-                    cargarCadetes.Obtener();
-                    cargarCadetes.Guardar(instance);
+                    instance.CargarCadetes = new AccesoADatosCadetesJSON();
+                    instance.ListaCadetes = instance.CargarCadetes.Obtener();
 
-                    AccesoADatosPedido cargarPedidos = new AccesoADatosPedidoJSON();
-                    cargarPedidos.Obtener();
-                    cargarPedidos.Guardar(instance);
+                    instance.CargarPedidos = new AccesoADatosPedidoJSON();
+                    instance.ListaPedidos = instance.CargarPedidos.Obtener();
                 }
                 return instance;
             }

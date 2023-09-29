@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -47,6 +48,7 @@ namespace WebApi.Controllers
             _cadeteria.AgregarPedido();
             if (_cadeteria.ListaPedidos.Count == cantPedidos + 1)
             {
+                _cadeteria.CargarPedidos.Guardar(_cadeteria.ListaPedidos);
                 return Ok("Pedido agregado correctamente");
             }
             else
@@ -60,6 +62,7 @@ namespace WebApi.Controllers
         public IActionResult AsignarPedido(int idPedido, int idCadete)
         {
             _cadeteria.AsignarPedido(idPedido, idCadete);
+            _cadeteria.CargarPedidos.Guardar(_cadeteria.ListaPedidos);
             return Ok($"Pedido {idPedido} asignado al cadete {idCadete}.");
         }
 
@@ -67,6 +70,7 @@ namespace WebApi.Controllers
         public IActionResult CambiarEstadoPedido(int idPedido, int nuevoEstado)
         {
             _cadeteria.CambiarEstadoPedido(idPedido, nuevoEstado);
+            _cadeteria.CargarPedidos.Guardar(_cadeteria.ListaPedidos);
             return Ok($"Estado del pedido {idPedido} cambiado a {nuevoEstado}.");
         }
 
@@ -74,6 +78,7 @@ namespace WebApi.Controllers
         public ActionResult CambiarCadetePedido(int idPedido, int idNuevoCadete)
         {
             _cadeteria.CambiarCadetePedido(idPedido, idNuevoCadete);
+            _cadeteria.CargarPedidos.Guardar(_cadeteria.ListaPedidos);
             return Ok($"Cadete del pedido {idPedido} cambiado a {idNuevoCadete}.");
         }
     }
